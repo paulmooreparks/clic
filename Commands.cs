@@ -156,6 +156,25 @@ internal class ClearCommand {
     }
 }
 
+[Command("del", "Delete a variable")]
+[Argument(typeof(string), "variable", "The variable to delete")]
+internal class DelCommand {
+    public int Execute(string variable, Dictionary<string,double> variables) {
+        if (string.IsNullOrEmpty(variable)) {
+            Console.Error.WriteLine("Error: Variable name cannot be empty");
+            return Result.Error;
+        }
+        
+        if (variables.Remove(variable)) {
+            return Result.Success;
+        }
+
+        Console.Error.WriteLine($"Error: Variable '{variable}' not found");
+        return Result.Error;
+    }
+
+}
+
 [Command("stack", "List all items on the stack, from top to bottom")]
 internal class StackCommand {
     public int Execute(Stack<double> stack) {

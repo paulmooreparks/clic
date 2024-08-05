@@ -6,7 +6,7 @@ The `clic` CLI Stack Calculator is a command-line application that implements a 
 
 Run `clic` to start the interactive REPL:
 
-```sh
+```text
 $ clic
 clic, the CLI Stack Calculator v1.0.0.0
 exit     Exit the application
@@ -17,7 +17,7 @@ clic> + 2 3
 
 Commands may also be executed directly from the command line:
 
-```sh
+```text
 $ clic + 2 3
 5
 ```

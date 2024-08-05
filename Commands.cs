@@ -14,11 +14,18 @@ internal class RootCommand {
 
 [Command("load", "Load stack and variables from persistent storage")]
 internal class LoadCommand {
-    public int Execute(Stack<double> stack, PersistenceService persistenceService) {
+    public int Execute(Stack<double> stack, Dictionary<string,double> variables, PersistenceService persistenceService) {
         var newStack = persistenceService.LoadStack();
         stack.Clear();
         stack.PushAll(newStack);
-        persistenceService.LoadVariables();
+
+        var newVariables = persistenceService.LoadVariables();
+        variables.Clear();
+
+        foreach (var kvp in newVariables) {
+            variables[kvp.Key] = kvp.Value;
+        }
+
         return Result.Success;
     }
 }

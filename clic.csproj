@@ -7,11 +7,12 @@
     <Nullable>enable</Nullable>
     <RootNamespace>Clic</RootNamespace>
     <AssemblyName>clic</AssemblyName>
-    <Version>1.0.2</Version>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cliffer" Version="0.4.5-prerelease" />
+    <PackageReference Include="Cliffer" Version="0.4.6-prerelease" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
   </ItemGroup>
 
 </Project>

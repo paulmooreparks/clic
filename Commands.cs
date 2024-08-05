@@ -63,9 +63,12 @@ internal class PopCommand {
             if (!string.IsNullOrEmpty(variable)) { // We already checked validity above
                 var variables = Utility.GetService<Dictionary<string, double>>()!;
                 variables[variable] = value;
+                Console.WriteLine($"{variable} = {value}");
+            }
+            else {
+                Console.WriteLine(value);
             }
 
-            Console.WriteLine(value);
             return Result.Success;
         }
 

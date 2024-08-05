@@ -8,7 +8,7 @@ Run `clic` to start the interactive REPL:
 
 ```text
 $ clic
-clic, the CLI Stack Calculator v1.0.0.0
+clic, the CLI Stack Calculator v1.1.0.0
 exit     Exit the application
 help, ?  Show help and usage information
 clic> + 2 3
@@ -32,10 +32,10 @@ clic> stack
 2
 1
 clic> pop x
-4
+x = 4
 clic> exit
 $ clic
-clic, the CLI Stack Calculator v1.0.0.0
+clic, the CLI Stack Calculator v1.1.0.0
 exit     Exit the application
 help, ?  Show help and usage information
 
@@ -46,6 +46,8 @@ clic> stack
 clic> vars
 x = 4
 ```
+
+The stack will be saved to a file named `stack.txt` in the `.clic` subdirectory of the user's profile directory. Variables will be saved to a file named `vars.txt` in the same directory.
 
 ## Commands
 
@@ -65,7 +67,7 @@ Clear the stack and/or variables.
 ```text
 clic> push 5 10 15
 clic> pop x
-15
+x = 15
 clic> stack
 10
 5
@@ -74,6 +76,28 @@ clic> stack
 clic> vars
 x = 15
 clic> clear --vars
+clic> vars
+clic> 
+```
+
+#### del
+
+Delete a variable.
+
+##### Syntax
+`del <variable>`
+
+##### Parameters
+- `<variable>`: The name of the variable to delete.
+
+##### Examples
+```text
+clic> push 5
+clic> pop x
+x = 5
+clic> vars
+x = 5
+clic> del x
 clic> vars
 clic> 
 ```
@@ -121,7 +145,7 @@ Pop the top value from the stack and store it in the variable `x`.
 ```text
 clic> push 5
 clic> pop x
-5
+x = 5
 clic> print x
 5
 ```
@@ -224,7 +248,9 @@ List all variables and their values.
 clic> push 5
 clic> push 10
 clic> pop x
+x = 10
 clic> pop y
+y = 5
 clic> vars
 x = 10
 y = 5
@@ -511,6 +537,7 @@ Print the value of a variable or constant.
 ```text
 clic> push 5
 clic> pop x
+x = 5
 clic> print x
 5
 ```
@@ -540,6 +567,38 @@ The characters `π` and `τ` may also be used to represent the constant values o
 ```text
 clic> + π τ
 9.42477796076938
+```
+
+## Macros
+
+Macros are supported courtesy of the Cliffer library. To add macros of your own, first create an `appsettings.json` file in the `.clic` subdirectory of your user profile directory. The file should contain a `Cliffer` section with a `Macros` array. Each macro should have a `Name`, `Description`, and `Script` property. The `Script` property should contain the commands to be executed when the macro is called. Multiple commands may be provided, separated by semicolons (`;`). Arguments may be passed to the script using the `{{[arg]::n}}` syntax.
+
+For example, the following `appsettings.json` file defines a `copy` macro that duplicates the top value on the stack and pops the top value into a variable:
+
+```json
+{
+    "Cliffer": {
+        "Macros": [
+            {
+                "Name": "copy",
+                "Description": "Copy a value from top of stack into a variable, leaving the stack intact.",
+                "Script": "dup;pop {{[arg]::0}}"
+            }
+        ]
+    }
+}
+```
+
+Once defined, you may use the `copy` macro as follows:
+
+```text
+clic> push 5
+clic> copy x
+x = 5
+clic> print x
+5
+clic> stack
+5
 ```
 
 ## License

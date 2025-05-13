@@ -8,7 +8,7 @@ namespace Clic;
 [RootCommand("clic, the CLI Stack Calculator")]
 internal class RootCommand {
     public async Task<int> Execute(Command command, IServiceProvider serviceProvider, InvocationContext context) {
-        return await command.Repl(serviceProvider, context, new ClicReplContext());
+        return await command.Repl(serviceProvider, context, new ClicReplContext(command));
     }
 }
 

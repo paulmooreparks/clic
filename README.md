@@ -47,7 +47,7 @@ clic> vars
 x = 4
 ```
 
-The stack will be saved to a file named `stack.txt` in the `.clic` subdirectory of the user's profile directory. Variables will be saved to a file named `vars.txt` in the same directory.
+The stack will be saved to a file named `stack.txt` in the `.clic` subdirectory of the user's profile directory. Variables will be saved to a file named `variables.txt` in the same directory.
 
 ## Commands
 
